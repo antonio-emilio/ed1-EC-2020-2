@@ -44,6 +44,17 @@ OBS:Essa funcionalidade podera ou não ser implementada de acordo com o andament
 ### Depêndencias
 O Gerenciador de projetos utilizará a linguagem de programação C e a biblioteca visual ncurses.
 
+### Como Rodar
+
+dentro do  diretório *project*, rode o seguinte commando: 
+
+```
+gcc main.c -o <nome do executavel> -lncurses
+
+```
+
+agora apenas rode o executavel e seja feliz :)
+
 ### Autores
 
 * Victor Eduardo Iscava Moreira;
