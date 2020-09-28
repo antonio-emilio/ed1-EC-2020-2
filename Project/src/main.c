@@ -5,13 +5,13 @@ int main(){
 	// inicializa a tela
 	// prepara o buffer de memoria limpa a tela
 	initscr();
-	
-	// recarrega a tela para dar load no que esta
-	// na memoria
-	refresh();
+	start_color();
 
-	getch();
-	
+  	getch();
+
+	/*
+		program must run here
+	*/
 
 	// desaloca a memoria e termina ncurses
 	endwin();
