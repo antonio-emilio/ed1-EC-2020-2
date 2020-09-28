@@ -6,12 +6,9 @@ int main(){
 	// prepara o buffer de memoria limpa a tela
 	initscr();
 	
-	// recarrega a tela para dar load no que esta
-	// na memoria
-	refresh();
-
-	getch();
-	
+	/*
+		program must run here
+	*/
 
 	// desaloca a memoria e termina ncurses
 	endwin();
