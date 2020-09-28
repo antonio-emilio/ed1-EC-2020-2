@@ -2,16 +2,25 @@
 #define __LABEL_H__ 
 
 #include <ncurses.h>
+
 #include <stdlib.h>
+#include <string.h>
+
+#include "Error.h"
+
 
 
 #define LABEL_NAME_SIZE 20
+#define NUMB_COLORS 8
 
 typedef char LabelName[LABEL_NAME_SIZE];
 
-typedef int Color;
+typedef unsigned int Color;
+
+int AVAILABLE_COLORS[NUMB_COLORS];
 
 typedef struct Label{ 
+
     LabelName name;
     Color color;
 
