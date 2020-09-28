@@ -1,4 +1,4 @@
-#include "Label.h"
+#include "../include/Label.h"
 
 
 Label_t* createLabel(Color color, LabelName name){
