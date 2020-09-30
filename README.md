@@ -2,7 +2,7 @@
 
 [![Licença](https://img.shields.io/github/license/tastyigniter/TastyIgniter.svg?label=License&style=flat-square)](https://github.com/tastyigniter/TastyIgniter/blob/master/LICENSE.txt)
 
-[Gerenciador de Projetos](https://github.com/VniciusMiranda/ed1-EC-2020-1) é um Software para organizar atividades, de modo a acompanhar o progresso de projetos. A medida que vamos evoluindo na área de computação cada vez mais surgem ideias de novos projetos a serem feitos de modo que torna dificil organizar as demandas de cada projeto. Tendo isso vista, o Gerenciador de projetos é uma proposta de solução para essa problematica.
+[Gerenciador de Projetos](https://github.com/VniciusMiranda/ed1-EC-2020-1) é uma aplicação de terminal exclusiva para linux, que visa ser um meio de organizar atividades, de modo a acompanhar o progresso de projetos. A medida que vamos evoluindo na área de computação cada vez mais surgem ideias de novos projetos a serem feitos de modo que torna dificil organizar as demandas de cada projeto. Tendo isso vista, o Gerenciador de projetos é uma proposta de solução para essa problematica.
 
 ### Documentação
 
@@ -44,13 +44,14 @@ OBS:Essa funcionalidade podera ou não ser implementada de acordo com o andament
 ### Depêndencias
 O Gerenciador de projetos utilizará a linguagem de programação C e a biblioteca visual ncurses.
 
-### Como Rodar
+### Como Compilar e Rodar
 
 dentro do  diretório *project*, rode o seguinte commando: 
 
 ```
-gcc main.c -o <nome do executavel> -lncurses
+make
 
+./executable/project-organizer
 ```
 
 agora apenas rode o executavel e seja feliz :)
