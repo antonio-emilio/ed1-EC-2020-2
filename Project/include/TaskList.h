@@ -2,6 +2,8 @@
 
 #define __TASK_LIST_H__ 
 
+#include "projectOrganizer.h"
+
 #include "Task.h"
 
 
