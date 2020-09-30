@@ -1,14 +1,7 @@
 #ifndef __LABEL_H__
 #define __LABEL_H__ 
 
-#include <ncurses.h>
-
-#include <stdlib.h>
-#include <string.h>
-
-#include "Error.h"
-
-
+#include "projectOrganizer.h"
 
 #define LABEL_NAME_SIZE 20
 #define NUMB_COLORS 8
@@ -19,20 +12,25 @@ typedef unsigned int Color;
 
 int AVAILABLE_COLORS[NUMB_COLORS];
 
-typedef struct Label{ 
 
+typedef struct Label{ 
     LabelName name;
     Color color;
 
 } Label_t;
 
+
+/* inicializa o que é necessário para a 
+utilização de labels no projeto */
+Exception initLabels();
+
 Label_t* createLabel(Color color, LabelName name);
 
-void deleteLabel(Label_t* l);
+Exception deleteLabel(Label_t* l);
 
-void setColor(Label_t* l, Color c);
+Exception setColor(Label_t* l, Color c);
 
-void setLabelName(Label_t* l, LabelName name);
+Exception setLabelName(Label_t* l, LabelName name);
 
 Color getColor(Label_t* l);
 

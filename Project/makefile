@@ -13,8 +13,10 @@ EXECUTABLE = executable/project-organizer
 # libraries
 LIBS = -lncurses
 
-_DEPS= Error.h Label.h Project.h Task.h TaskList.h
+
+_DEPS= Exceptions.h Label.h Project.h Task.h TaskList.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
+
 
 _OBJ = Label.o main.o Project.o Task.o TaskList.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
@@ -23,5 +25,12 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
+
 $(EXECUTABLE): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+
+
+.PHONY: clean
+
+clean:
+	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~ 
