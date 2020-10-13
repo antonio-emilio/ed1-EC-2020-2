@@ -5,68 +5,82 @@
 #define False 0
 
 typedef struct elemento{
-    char c;
+    int n;
     struct elemento* prox;
     
 } Elemento_t;
 
 typedef Elemento_t* Pilha_t;
+
 typedef int bool;
 
-Pilha_t p = NULL;
+Pilha_t p1;
+
 
 int restart(Pilha_t* p);
 
-int push(Pilha_t* p, char c);
+int push(Pilha_t* p, int c);
 
-char pop(Pilha_t* p);
+int pop(Pilha_t* p);
 
-char top(Pilha_t* p);
+int top(Pilha_t p);
 
-bool is_empty(Pilha_t p);
+int size(Pilha_t* p);
 
+int insertBottom(Pilha_t* p, int i);
 
 int main(){ 
-    int i, j, n, m;
-    bool is_possible = True;
+    int i;
 
-    scanf("%d", &n);
-    i = 1, j = n;
-
-    while(n--)
+    while(True)
     {
-        scanf("%d", &m);
-        if(m != i && m != j) is_possible = False;
-
-        i++;
-        j--;
+        scanf("%d", &i);
+        if(!i)
+            break;
+        else
+            push(&p1, i);
     }
 
-    is_possible ? printf("sim") : printf("nao");
+    while(True)
+    {
+        scanf("%d", &i);
+        if(!i)
+            break;
+        else
+            insertBottom(&p1, i);
+    }
+
+    restart(&p1);
 
     return 0;
 }
 
 
+
+
 int restart(Pilha_t* p){
-    char c;
+    int c;
 
-    do{
+    while(True)
+    {
         c = pop(p);
+        if(!c) break;
 
-    }while(c);
+        printf("%d\n", c);
+    }
+
 
     return 1;
 }
 
 
-int push(Pilha_t* p, char c){
+int push(Pilha_t* p, int c){
 
     Elemento_t* novo_elemento = (Elemento_t*) malloc(sizeof(Elemento_t));
     if(!novo_elemento) return -1; 
 
 
-    novo_elemento->c = c;
+    novo_elemento->n = c;
     novo_elemento->prox = *p;
     *p = novo_elemento;
 
@@ -78,12 +92,11 @@ int push(Pilha_t* p, char c){
 bool is_empty(Pilha_t p){ return !p; }
 
 
-char pop(Pilha_t* p){
+int pop(Pilha_t* p){
     if(!*p) return '\0';
 
-    // top element
     Elemento_t* top = *p;
-    char c = top->c;    
+    int c = top->n;    
     *p = top->prox;
     free(top);
 
@@ -91,6 +104,21 @@ char pop(Pilha_t* p){
 }
 
 
-char top(Pilha_t* p){
-    return (*p)->c;
+int top(Pilha_t p){
+    return p->n;
 }
+
+int insertBottom(Pilha_t* p, int i){
+
+    if(is_empty(*p))
+       push(p, i); 
+    else
+    { 
+        int x = top(p); 
+        pop(p); 
+        insertBottom(p, i); 
+
+        push(p, x); 
+    } 
+}
+
