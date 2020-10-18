@@ -22,6 +22,9 @@ typedef int boolean;
 
 typedef char Description[DESCRIPTION_SIZE];
 typedef char Title[TITLE_SIZE]; 
+typedef char Name[NAME_SIZE]; 
+typedef char Email[EMAIL_SIZE]; 
+typedef char Bio[BIO_SIZE]; 
 
 
 Exception initProjectOrganizer();

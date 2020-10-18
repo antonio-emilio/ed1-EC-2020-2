@@ -23,43 +23,46 @@ int push(Pilha_t* p, char* c);
 
 char* pop(Pilha_t* p);
 
-char* top(Pilha_t* p);
+char* top(Pilha_t p);
 
-bool is_empty(Pilha_t p);
+bool is_empty(Pilha_t* p);
 
 
 int main(){
     int t;
     char s[20];
+    char direction[20], street[20];
 
     scanf("%d", &t);
 
     while(t--)
     {
+        push(&p, "CASA");
         while(True)
         {
             scanf("%s", s);
-            if(!strcmp("ESCOLA", s)) break;
 
+            if(!strcmp("ESCOLA", s)) break;
             push(&p, s);
         }
 
-        char direction[20], street[20]; 
 
-        while(True)
+        while(!is_empty(&p))
         {
-            strcpy(street, top(&p));
-            pop(&p);
-            
-            strcpy(direction, !strcmp(top(&p), "DIREITA") ? "ESQUERDA" : "DIREITA");
+            strcpy(direction, !strcmp(top(p), "DIREITA") ? "ESQUERDA" : "DIREITA");
             pop(&p);
 
-            printf("Vire na %s na rua %s\n", street, direction);
+            strcpy(street, top(p));
+            pop(&p);
 
-            if(is_empty(p)) break;
+
+            if(!strcmp(street, "CASA"))
+                printf("Vire a %s na rua %s.\n", direction, street);
+
+            else
+                printf("Vire a %s na sua %s.\n", direction, street);
+
         }    
-
-        restart(&p);
     }
 
 
@@ -86,8 +89,8 @@ int push(Pilha_t* p, char* c){
 
 
     strcpy(novo_elemento->c, c);
-
     novo_elemento->prox = *p;
+
     *p = novo_elemento;
 
 
@@ -95,7 +98,7 @@ int push(Pilha_t* p, char* c){
 }
 
 
-bool is_empty(Pilha_t p){ return !p; }
+bool is_empty(Pilha_t* p){ return !(*p); }
 
 
 char* pop(Pilha_t* p){
@@ -112,6 +115,6 @@ char* pop(Pilha_t* p){
 }
 
 
-char* top(Pilha_t* p){
-    return (*p)->c;
+char* top(Pilha_t p){
+    return p->c;
 }
