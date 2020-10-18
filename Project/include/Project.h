@@ -1,6 +1,6 @@
 #ifndef __PROJECT_H__
 #define __PROJECT_H__
 
-#include "projectOrganizer.h"
+#include "ProjectOrganizer.h"
 
 #endif
