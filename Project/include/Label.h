@@ -1,7 +1,7 @@
 #ifndef __LABEL_H__
 #define __LABEL_H__ 
 
-#include "projectOrganizer.h"
+#include "ProjectOrganizer.h"
 
 #define LABEL_NAME_SIZE 20
 #define NUMB_COLORS 8
