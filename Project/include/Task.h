@@ -39,7 +39,9 @@ Exception deleteTask(Task_t* t);
 Exception addLabel(Task_t* t, Label_t* label);
 
 
-Exception show(Task_t* t, unsigned int y, unsigned x);
+Exception show(Task_t* t, unsigned int y, unsigned x, boolean selected);
+
+Exception hide(Task_t* t);
 
 
 boolean isDisplayed(Task_t* t);

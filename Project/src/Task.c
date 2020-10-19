@@ -47,7 +47,7 @@ Exception addLabel(Task_t* t, Label_t* label){
 
 
 
-Exception show(Task_t* t, unsigned int y, unsigned x){
+Exception show(Task_t* t, unsigned int y, unsigned x, boolean selected){
     if(!t) return INVALID_INPUT_EXCEPTION; 
 
 
@@ -56,14 +56,47 @@ Exception show(Task_t* t, unsigned int y, unsigned x){
 
     box(t->win, 0, 0);
 
-
     int title_len = strlen(t->title);
 
+    // move to the center of the component
     wmove(t->win, 0, (TASK_DISPLAY_WIDTH - title_len)/2);
-    wprintw(t->win, "%s", t->title);
+
+    // print the title
+    if(selected)
+    {
+        wattron(t->win, A_REVERSE);
+        wprintw(t->win, "%s", t->title);
+        wattroff(t->win, A_REVERSE);
+    }
+    else wprintw(t->win, "%s", t->title);
+
+
+    // display the labels if there are any 
+    if(t->numb_labels)
+    {
+        for(int i = 0; i < t->numb_labels && i < TASK_DISPLAY_HEIGHT - 2; i++)
+        {
+            Color label_color = t->labels[i]->color;
+            LabelName label_name;
+
+            strcpy(label_name, t->labels[i]->name);
+            wmove(t->win, 1 + i, 1);
+
+            // init color 
+            init_pair(label_color, COLOR_BLACK, label_color);
+
+            // toggles the color attribute 
+            wattron(t->win, COLOR_PAIR(label_color));
+            wprintw(t->win, "%s",label_name);
+            wattroff(t->win, COLOR_PAIR(label_color));
+        }
+
+
+        if(t->numb_labels >= TASK_DISPLAY_HEIGHT - 2)
+                wprintw(t->win, "%s", "...");
+    }
 
     wrefresh(t->win);
-
 }
 
 
@@ -72,8 +105,17 @@ Exception show(Task_t* t, unsigned int y, unsigned x){
 Exception hide(Task_t* t){
     if(!t) return INVALID_INPUT_EXCEPTION; 
 
-    //TODO: implement
-    
+    // clears the screen
+    for(int i = 0; i < TASK_DISPLAY_HEIGHT; i ++)
+        for( int j = 0; j < TASK_DISPLAY_WIDTH; j++)
+        {
+            wmove(t->win, i, j);
+            wprintw(t->win, " ");
+        }
+
+    wborder(t->win, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '); // Erase frame around the window
+    wrefresh(t->win); 
+    delwin(t->win);
 }
 
 
