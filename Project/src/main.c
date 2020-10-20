@@ -5,20 +5,11 @@
 
 
 int main(){
-	// inicializa a tela
-	// prepara o buffer de memoria limpa a tela
-	initscr();
-	cbreak();
-	noecho();
-
-	initLabels();
-
-	start_color();
+	init_project_organizer();	
 
 
 	Task_t* test = createTask("title teste", "this is a test task from the project organizer :)");
-	Task_t* test2 = createTask("title2 teste", "this is a test task from the project organizer :)");
-
+	Task_t* test2 = createTask("algum teste qualquer", "this is a test task from the project organizer :)");
 
 	addLabel(test2, createLabel(COLOR_CYAN, "label black"));
 	addLabel(test, createLabel(COLOR_BLUE, "feature"));
@@ -42,6 +33,7 @@ int main(){
 
 	}
 	refresh();
+
 	hide(test);
 	hide(test2);
 

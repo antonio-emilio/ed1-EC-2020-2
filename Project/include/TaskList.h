@@ -1,18 +1,23 @@
 #ifndef __TASK_LIST_H__
-
 #define __TASK_LIST_H__ 
-
-#include "ProjectOrganizer.h"
 
 #include "Task.h"
 
 
 typedef struct Element{ 
-    Task_t task;
+
+    Task_t* task;
     struct Element* next;
+
 } Element_t;
 
-typedef Element_t* TaskList_t; 
+
+typedef struct TaskList{
+
+    int num_tasks;
+    Element_t* head;
+
+} TaskList_t;
 
 
 #endif

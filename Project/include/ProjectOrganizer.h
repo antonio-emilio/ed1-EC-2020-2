@@ -7,10 +7,10 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <sys/ioctl.h>
-#include <unistd.h>
+
 
 #include "Exceptions.h"
+#include "Label.h"
 
 #define True 1
 #define False 0 
@@ -27,6 +27,7 @@ typedef char Name[NAME_SIZE];
 typedef char Email[EMAIL_SIZE]; 
 typedef char Bio[BIO_SIZE]; 
 
-
+// default ncurses configurations are defined here
+void init_project_organizer();
 
 #endif 
