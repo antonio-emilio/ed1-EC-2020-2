@@ -2,22 +2,23 @@
 
 
 
+Exception initLabels(){
+    for(int i = 0; i < NUMB_COLORS; i++)
+        INIT_PAIRS[i] = 0;
+}
+
 
 Label_t* createLabel(Color color, LabelName name){
 
     if(color >= NUMB_COLORS || strlen(name) > LABEL_NAME_SIZE)
         return (Label_t*) INVALID_INPUT_EXCEPTION; 
 
-    // verifica se a cor já não está sendo usada 
-    if(!AVAILABLE_COLORS[color])
-        return (Label_t*) UNAVAILABLE_COLOR_EXCEPTION;
 
-
-    // aloca memória para a nova label  
     Label_t* new_label = (Label_t*) malloc(sizeof(Label_t));
+
     if(!new_label) return (Label_t*) MEMORY_ALOCATION_EXCEPTION;
 
-    // atribui os valores passados a nova label
+
     setColor(new_label, color);
     setLabelName(new_label, name);
 
@@ -50,6 +51,8 @@ Exception setColor(Label_t* l, Color c){
 }
 
 
+
+
 Exception setLabelName(Label_t* l, LabelName name){
     if(strlen(name) > LABEL_NAME_SIZE) return INVALID_INPUT_EXCEPTION;
 
@@ -58,11 +61,15 @@ Exception setLabelName(Label_t* l, LabelName name){
 }
 
 
+
+
 // _______gettters________
 
 Color getColor(Label_t* l){
     return l ? l->color : (Color) INVALID_INPUT_EXCEPTION;
 }
+
+
 
 
 char* getLabelName(Label_t* l){

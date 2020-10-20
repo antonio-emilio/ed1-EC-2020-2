@@ -1,7 +1,7 @@
 #ifndef __LABEL_H__
 #define __LABEL_H__ 
 
-#include "projectOrganizer.h"
+#include "ProjectOrganizer.h"
 
 #define LABEL_NAME_SIZE 20
 #define NUMB_COLORS 8
@@ -10,7 +10,7 @@ typedef char LabelName[LABEL_NAME_SIZE];
 
 typedef unsigned int Color;
 
-int AVAILABLE_COLORS[NUMB_COLORS];
+int INIT_PAIRS[NUMB_COLORS];
 
 
 typedef struct Label{ 

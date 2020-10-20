@@ -13,12 +13,12 @@ EXECUTABLE = executable/project-organizer
 # libraries
 LIBS = -lncurses
 
-
-_DEPS= Exceptions.h Label.h Project.h Task.h TaskList.h
+# remember to include "Project.h" again
+_DEPS= Exceptions.h Label.h Task.h TaskList.h ProjectOrganizer.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-
-_OBJ = Label.o main.o Project.o Task.o TaskList.o
+# remember to include "Project.o" again
+_OBJ = Label.o main.o  Task.o TaskList.o ProjectOrganizer.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
