@@ -4,14 +4,13 @@
 
 
 Task_t* createTask(char* title, char* description){
-
     if(strlen(title) >= TASK_DISPLAY_WIDTH)
-        return (Task_t*) INVALID_INPUT_EXCEPTION;
+        return NULL;
 
 
     // aloca memória 
     Task_t* new_task = (Task_t*) malloc(sizeof(Task_t));
-    if(!new_task) return (Task_t*) MEMORY_ALOCATION_EXCEPTION;
+    if(!new_task) return NULL;
 
 
     // atribui os valores 
@@ -53,8 +52,7 @@ Exception addLabel(Task_t* t, Label_t* label){
         return INVALID_INPUT_EXCEPTION;
 
     t->available_colors[label->color] = False;
-    t->labels[t->numb_labels] = label;
-    t->numb_labels++;
+    t->labels[t->numb_labels++] = label;
 }
 
 
@@ -89,8 +87,7 @@ Exception removeLabel(Task_t* t, LabelName label_name){
 Exception show(Task_t* t, unsigned int y, unsigned x, boolean selected){
     if(!t) return INVALID_INPUT_EXCEPTION; 
 
-    if(!t->win) 
-        t->win = newwin(TASK_DISPLAY_HEIGHT, TASK_DISPLAY_WIDTH, y, x);    
+    if(!t->win) t->win = newwin(TASK_DISPLAY_HEIGHT, TASK_DISPLAY_WIDTH, y, x);    
 
     refresh();
 
@@ -132,7 +129,7 @@ Exception show(Task_t* t, unsigned int y, unsigned x, boolean selected){
 
         // in case there are more labels but not enough space we display "..."
         if(t->numb_labels >= TASK_DISPLAY_HEIGHT - 2)
-                wprintw(t->win, "%s", "...");
+                wprintw(t->win, "%s", " ...");
     }
 
     wrefresh(t->win);

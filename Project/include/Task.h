@@ -10,8 +10,8 @@
 #define LABELS_MAX 4 
 
 
-#define TASK_DISPLAY_WIDTH 20 
-#define TASK_DISPLAY_HEIGHT 5
+#define TASK_DISPLAY_WIDTH 25 
+#define TASK_DISPLAY_HEIGHT 6
 
 typedef char Title[TASK_DISPLAY_WIDTH];
 
