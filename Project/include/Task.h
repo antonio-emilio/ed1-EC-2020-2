@@ -13,12 +13,11 @@
 #define TASK_DISPLAY_WIDTH 20 
 #define TASK_DISPLAY_HEIGHT 5
 
-
-
 typedef struct Task{
 
     Title title;
     Description description;
+    int available_colors[NUMB_COLORS];
 
 
     Label_t* labels[LABELS_MAX];
@@ -40,6 +39,7 @@ Exception addLabel(Task_t* t, Label_t* label);
 
 
 Exception show(Task_t* t, unsigned int y, unsigned x, boolean selected);
+
 
 Exception hide(Task_t* t);
 
