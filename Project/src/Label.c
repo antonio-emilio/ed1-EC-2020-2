@@ -4,8 +4,7 @@
 
 Exception initLabels(){
     for(int i = 0; i < NUMB_COLORS; i++)
-        AVAILABLE_COLORS[i] = 1;
-
+        INIT_PAIRS[i] = 0;
 }
 
 
@@ -15,16 +14,10 @@ Label_t* createLabel(Color color, LabelName name){
         return (Label_t*) INVALID_INPUT_EXCEPTION; 
 
 
-    if(!AVAILABLE_COLORS[color])
-        return (Label_t*) UNAVAILABLE_COLOR_EXCEPTION;
-
-
     Label_t* new_label = (Label_t*) malloc(sizeof(Label_t));
 
     if(!new_label) return (Label_t*) MEMORY_ALOCATION_EXCEPTION;
 
-
-    AVAILABLE_COLORS[color] = 0;
 
     setColor(new_label, color);
     setLabelName(new_label, name);

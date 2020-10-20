@@ -10,7 +10,7 @@ typedef char LabelName[LABEL_NAME_SIZE];
 
 typedef unsigned int Color;
 
-int AVAILABLE_COLORS[NUMB_COLORS];
+int INIT_PAIRS[NUMB_COLORS];
 
 
 typedef struct Label{ 
