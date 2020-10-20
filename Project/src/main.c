@@ -11,28 +11,42 @@ int main(){
 	cbreak();
 	noecho();
 
-	// project organizer init funcs
-	if(initProjectOrganizer() == INVALID_TERMINAL_SIZE)
-		return -1;
-
-
 	initLabels();
-
 
 	start_color();
 
 
 	Task_t* test = createTask("title teste", "this is a test task from the project organizer :)");
-	Label_t* label_test = createLabel(COLOR_BLUE, "feature");
-
-	addLabel(test,label_test);
-
-	show(test, 1, 1);
+	Task_t* test2 = createTask("title2 teste", "this is a test task from the project organizer :)");
 
 
+	addLabel(test2, createLabel(COLOR_CYAN, "label black"));
+	addLabel(test, createLabel(COLOR_BLUE, "feature"));
+	addLabel(test, createLabel(COLOR_WHITE, "label white"));
+	addLabel(test, createLabel(COLOR_CYAN, "label cyan"));
+	addLabel(test, createLabel(COLOR_GREEN, "label green"));
+	addLabel(test, createLabel(COLOR_MAGENTA, "label magenta"));
+
+	boolean selected = False;
+	char c; 
+
+	while(c != '0')
+	{
+		c = getch();
+
+		if(c == 's')	
+			selected = !selected;
+
+		show(test, 1, 1, selected);
+		show(test2, TASK_DISPLAY_HEIGHT + 4, 1, selected);
+
+	}
 	refresh();
+	hide(test);
+	hide(test2);
 
 	getch();
+
 
 	endwin();
 	return 0;

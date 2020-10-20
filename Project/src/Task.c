@@ -79,6 +79,8 @@ Exception removeLabel(Task_t* t, LabelName label_name){
         
     }
 
+    return VALUE_NOT_FOUND_EXCEPTION;
+
 }
 
 
