@@ -23,6 +23,9 @@ Task_t* createTask(char* title, char* description){
     // init labels
     for(int i = 0; i < LABELS_MAX; i++)
         new_task->labels[i] = NULL;
+    
+    for(int i = 0; i < NUMB_COLORS; i++)
+        new_task->available_colors[i] = True;
 
     new_task->win = NULL;
 
@@ -46,8 +49,10 @@ Exception deleteTask(Task_t* t){
 
 
 Exception addLabel(Task_t* t, Label_t* label){
-    if(!t || !label || t->numb_labels >= LABELS_MAX) return INVALID_INPUT_EXCEPTION;
+    if(!t || !label || t->numb_labels >= LABELS_MAX || !t->available_colors[label->color]) 
+        return INVALID_INPUT_EXCEPTION;
 
+    t->available_colors[label->color] = False;
     t->labels[t->numb_labels] = label;
     t->numb_labels++;
 }
@@ -173,7 +178,7 @@ Exception setDescription(Task_t* t, char* d){
 
 
 Exception setTitle(Task_t* t, char* title){
-    if(!t || strlen(title) >= TITLE_SIZE) return INVALID_INPUT_EXCEPTION;
+    if(!t || strlen(title) >= TASK_DISPLAY_WIDTH) return INVALID_INPUT_EXCEPTION;
 
     strcpy(t->title, title);
 

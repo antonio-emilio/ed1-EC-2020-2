@@ -13,11 +13,13 @@
 #define TASK_DISPLAY_WIDTH 20 
 #define TASK_DISPLAY_HEIGHT 5
 
+typedef char Title[TASK_DISPLAY_WIDTH];
+
 typedef struct Task{
 
     Title title;
     Description description;
-    int available_colors[NUMB_COLORS];
+    boolean available_colors[NUMB_COLORS];
 
 
     Label_t* labels[LABELS_MAX];
