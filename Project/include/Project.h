@@ -20,57 +20,58 @@ typedef struct Project_Element
 {
     Title title;
     Description description;
-    struct CollaboratorsList collaboratorListElement; // Ponteiro para o primeiro elemento da lista de colaboradores
+    struct CollaboratorsListElement collaboratorsListElement; // Ponteiro para o primeiro elemento da lista de colaboradores
 } Project_Element_t;
 
 typedef Project_Element_t *Project;
 
-
 // Collaborator List struct
-typedef struct Collaborators_List
+typedef struct Collaborators_List_Element
 {
     int id;
     struct Collaborator collaborator;  // Perfil do colaborador
-    struct Collaborators_List *next_collaborator;   // Ponteiro para a próxima struct da lista de colaborador com o ponteiro do próximo colaborador da lista
-} Collaborators_List_t;
+    struct Collaborators_List_Element *prev_collaboratorsListElement;
+    struct Collaborators_List_Element *next_collaboratorsListElement;   // Ponteiro para a próxima struct da lista de colaborador com o ponteiro do próximo colaborador da lista
+} Collaborators_List_Element_t;
 
-typedef Collaborators_List_t *CollaboratorsList;
+typedef Collaborators_List_Element_t *CollaboratorsListElement;
 
 // Collaborator struct
 typedef struct Collaborator_Element
 {
     Name name;
     Email email;
-    Bio bio;
+    Description description;
 } Collaborator_Element_t;
 
 typedef Collaborator_Element_t *Collaborator;
 
-
 // Functions
 
-Project createProject(Title title, Description description, CollaboratorsList collaboratorsList);
+Project createProject(Title title, Description description);
 
-void showProjects();
+Exception showProjects();
 
-void showProjectDetails(Project project);
+Exception showProjectDetails(Project project);
 
-void showProjectCollaboratorsList(Project project);
+Exception showProjectCollaboratorsList(Project project);
 
-void showCollaboratorProfile(Project project, Name name);
+Exception showCollaboratorProfile(Project project, Name name);
 
-Collaborator createCollaborator(Name name, Email email, Bio bio);
+Collaborator createCollaboratorProfile(Name name, Email email, Description description);
 
-void pushProject(Project project);
+Exception editCollaboratorProfile(Project project, Name name);
 
-void deleteProject(Project project);
+Exception pushProject(Project project);
 
-void pushCollaborator(Project protect, Collaborator collaborator);
+Exception deleteProject(Project project);
 
-void deleteCollaborator(Project protect, Collaborator collaborator);
+Exception pushCollaborator(Project protect, Collaborator collaborator);
 
-Collaborator searchCollboratorByName(Name name);
+Exception deleteCollaborator(Project protect, Collaborator collaborator);
 
+Collaborator searchCollaboratorByName(Project project, Name name);
 
+Exception showProjectTasklist(Project project);
 
 #endif
