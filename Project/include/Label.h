@@ -22,15 +22,15 @@ typedef struct Label{
 
 /* inicializa o que é necessário para a 
 utilização de labels no projeto */
-Exception initLabels();
+int initLabels();
 
 Label_t* createLabel(Color color, LabelName name);
 
-Exception deleteLabel(Label_t* l);
+int deleteLabel(Label_t* l);
 
-Exception setColor(Label_t* l, Color c);
+int setColor(Label_t* l, Color c);
 
-Exception setLabelName(Label_t* l, LabelName name);
+int setLabelName(Label_t* l, LabelName name);
 
 Color getColor(Label_t* l);
 
