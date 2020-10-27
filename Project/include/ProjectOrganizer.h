@@ -11,6 +11,7 @@
 #include <unistd.h>
 
 #include "Exceptions.h"
+#include "Display.h"
 
 #define True 1
 #define False 0 

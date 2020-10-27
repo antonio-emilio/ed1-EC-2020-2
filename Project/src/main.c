@@ -14,7 +14,11 @@ int main(){
 	initLabels();
 
 	start_color();
+	int y, x;
+	getmaxyx(stdscr, y, x);
 
+
+	printBanner(0, 0);
 
 	Task_t* test = createTask("title teste", "this is a test task from the project organizer :)");
 	Task_t* test2 = createTask("title2 teste", "this is a test task from the project organizer :)");
