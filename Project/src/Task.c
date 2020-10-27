@@ -1,6 +1,10 @@
 #include "Task.h"
 
 
+/* 
+    Allocates memory for the new task 
+    being created and init default values 
+*/
 Task_t* createTask(char* title, char* description){
     if(strlen(title) >= TASK_DISPLAY_WIDTH)
         return NULL;
@@ -38,7 +42,7 @@ int deleteTask(Task_t* t){
     if(!t) return ERROR;
 
     if(isDisplayed(t)) hide(t);
-
+  
     free(t);
     return OK;
 }
@@ -56,16 +60,17 @@ int addLabel(Task_t* t, Label_t* label){
 
 
 
-
 int removeLabel(Task_t* t, LabelName label_name){
+
     for(int i = 0; i < t->numb_labels; i++)
     {
         if(!strcmp(t->labels[i]->name, label_name)) 
         {
+            // deletes the label found
             deleteLabel(t->labels[i]);
-
             t->labels[i] = NULL;
 
+            // re-orders the sequencial list
             for(int i = 0; i < LABELS_MAX - 1; i++)
                 t->labels[i] = t->labels[i + 1];
 
@@ -79,7 +84,6 @@ int removeLabel(Task_t* t, LabelName label_name){
     return ERROR;
 
 }
-
 
 
 int moveTask(Task_t* t, int y, int x, bool select){
@@ -98,13 +102,14 @@ int show(Task_t* t, unsigned int y, unsigned x, bool selected){
 
     if(!t->win || IS_RESIZED) t->win = newwin(TASK_DISPLAY_HEIGHT, TASK_DISPLAY_WIDTH, y, x);    
 
+
     refresh();
 
     box(t->win, 0, 0);
 
     int title_len = strlen(t->title);
 
-    // move to the center of the component
+    // move to the center up of the component
     wmove(t->win, 0, (TASK_DISPLAY_WIDTH - title_len)/2);
 
     // print the title
@@ -124,6 +129,8 @@ int show(Task_t* t, unsigned int y, unsigned x, bool selected){
 
             wmove(t->win, 1 + i, 1);
 
+            // if the color pair has already beeing init and it is init again
+            // it causes a segmentation fault (core dumped) error
             if(!INIT_PAIRS[label_color])
             {
                 init_pair(label_color, COLOR_BLACK, label_color);
@@ -146,23 +153,24 @@ int show(Task_t* t, unsigned int y, unsigned x, bool selected){
 
 
 
-
 int hide(Task_t* t){
     if(!t || !isDisplayed(t)) return ERROR; 
 
     // erase what's inside the window
     for(int i = 0; i < TASK_DISPLAY_HEIGHT; i ++)
-        for( int j = 0; j < TASK_DISPLAY_WIDTH; j++)
-        {
-            wmove(t->win, i, j);
-            wprintw(t->win, " ");
-        }
 
-    wborder(t->win, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '); // Erase frame around the window
+        for( int j = 0; j < TASK_DISPLAY_WIDTH; j++)
+
+            mvwprintw(t->win, i, j, " ");
+
+    // Erase frame around the window
+    wborder(t->win, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '); 
+
     wrefresh(t->win); 
     delwin(t->win);
     t->win = NULL;
 }
+
 
 
 
