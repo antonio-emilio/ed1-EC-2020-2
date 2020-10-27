@@ -10,8 +10,8 @@
 #define LABELS_MAX 4 
 
 
-#define TASK_DISPLAY_WIDTH 20 
-#define TASK_DISPLAY_HEIGHT 5
+#define TASK_DISPLAY_WIDTH 25 
+#define TASK_DISPLAY_HEIGHT 6
 
 typedef char Title[TASK_DISPLAY_WIDTH];
 
@@ -19,7 +19,7 @@ typedef struct Task{
 
     Title title;
     Description description;
-    boolean available_colors[NUMB_COLORS];
+    bool available_colors[NUMB_COLORS];
 
 
     Label_t* labels[LABELS_MAX];
@@ -34,25 +34,28 @@ typedef struct Task{
 Task_t* createTask(char* title, char* description);
 
 
-Exception deleteTask(Task_t* t);
+int deleteTask(Task_t* t);
 
 
-Exception addLabel(Task_t* t, Label_t* label);
+int addLabel(Task_t* t, Label_t* label);
 
 
-Exception show(Task_t* t, unsigned int y, unsigned x, boolean selected);
+int show(Task_t* t, unsigned int y, unsigned x, bool selected);
 
 
-Exception hide(Task_t* t);
+int hide(Task_t* t);
 
 
-boolean isDisplayed(Task_t* t);
+bool isDisplayed(Task_t* t);
 
 
-Exception setDescription(Task_t* t, char* d);
+int moveTask(Task_t* t, int y, int x, bool selected);
 
 
-Exception setTitle(Task_t* t, char* title);
+int setDescription(Task_t* t, char* d);
+
+
+int setTitle(Task_t* t, char* title);
 
 
 char* getDescription(Task_t* t);
