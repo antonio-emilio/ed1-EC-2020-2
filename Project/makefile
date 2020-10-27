@@ -14,11 +14,11 @@ EXECUTABLE = executable/project-organizer
 LIBS = -lncurses
 
 # remember to include "Project.h" again
-_DEPS= Exceptions.h Label.h Task.h TaskList.h ProjectOrganizer.h Display.h
+_DEPS= Exceptions.h Label.h Task.h TaskList.h ProjectOrganizer.h Display.h sqlite3.h sqlite3ext.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
 # remember to include "Project.o" again
-_OBJ = Label.o main.o  Task.o TaskList.o ProjectOrganizer.o Display.o 
+_OBJ = Label.o main.o  Task.o TaskList.o ProjectOrganizer.o Display.o sqlite3.o shell.o 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
