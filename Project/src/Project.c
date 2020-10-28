@@ -5,15 +5,15 @@
 Project createProject(Title title, Description description)
 {
     if (strlen(title) >= TITLE_SIZE || strlen(description) >= DESCRIPTION_SIZE)
-        return (Project)INVALID_INPUT_EXCEPTION;
+        return ERROR;
     Project project = (Project)malloc(sizeof(Project_Element_t));
     if (!project)
-        return (Project)MEMORY_ALOCATION_EXCEPTION;
+        return ERROR;
     project->title = title;
     project->description = description;
     CollaboratorsListElement collaboratorsListElement = (CollaboratorsListElement)malloc(sizeof(Collaborators_List_Element_t));
     if (!collaboratorsListElement)
-        return (Project)MEMORY_ALOCATION_EXCEPTION;
+        return ERROR;
     collaboratorsListElement->id = 0;
     collaboratorsListElement->collaborator = NULL;
     collaboratorsListElement->prev_collaboratorsListElement = NULL;
@@ -22,11 +22,11 @@ Project createProject(Title title, Description description)
     return project;
 }
 
-Exception showProjects()
+int showProjects()
 {
     ProjectListElement actual = firstProject;
     if (!actual)
-        return NULL_POINTER_EXCEPTION;
+        return ERROR;
     printf("\n");
     while (actual)
     {
@@ -37,10 +37,10 @@ Exception showProjects()
     return SUCCESS;
 }
 
-Exception showProjectDetails(Project project)
+int showProjectDetails(Project project)
 {
     if (!project)
-        return NULL_POINTER_EXCEPTION;
+        return ERROR;
     CollaboratorsListElement actual = project->collaboratorsListElement;
     printf("\n\n%d | Projeto %s\nDescricao: %s\nColaboradores:", project->id, project->title, project->description);
     if (actual->collaborator == NULL)
@@ -53,10 +53,10 @@ Exception showProjectDetails(Project project)
     return SUCCESS
 }
 
-Exception showProjectCollaboratorsList(Project project)
+int showProjectCollaboratorsList(Project project)
 {
     if (!project)
-        return NULL_POINTER_EXCEPTION;
+        return ERROR;
     CollaboratorsListElement actual = project->collaboratorsListElement;
     printf("\n\nColaboradores:");
     if (actual->collaborator == NULL)
@@ -69,13 +69,13 @@ Exception showProjectCollaboratorsList(Project project)
     return SUCCESS;
 }
 
-Exception showCollaboratorProfile(Project project, Name name)
+int showCollaboratorProfile(Project project, Name name)
 {
     if (!project)
-        return NULL_POINTER_EXCEPTION;
+        return ERROR;
     CollaboratorsListElement actual = project->collaboratorsListElement;
     if (strlen(name) >= NAME_SIZE)
-        return INVALID_INPUT_EXCEPTION;
+        return ERROR;
     while (actual)
     {
         if (!strcmp(name, actual->collaborator->name))
@@ -88,28 +88,28 @@ Exception showCollaboratorProfile(Project project, Name name)
             actual = actual->next_collaboratorsListElement;
         }
     }
-    return NOT_FOUND_EXCEPTION;
+    return ERROR;
 }
 
 Collaborator createCollaboratorProfile(Name name, Email email, Description description)
 {
     if (strlen(name) >= NAME_SIZE || strlen(email) >= EMAIL_SIZE || strlen(description) >= DESCRIPTION_SIZE)
-        return (Collaborator)INVALID_INPUT_EXCEPTION;
+        return ERROR;
     Collaborator collaborator = (Collaborator)malloc(sizeof(Collaborator_Element_t));
     if (!collaborator)
-        return (Collaborator)MEMORY_ALOCATION_EXCEPTION;
+        return ERROR;
     collaborator->name = name;
     collaborator->email = email;
     collaborator->description = description;
     return collaborator;
 }
 
-Exception editCollaboratorProfile(Project project, Name name)
+int editCollaboratorProfile(Project project, Name name)
 {
     if (!project)
-        return NULL_POINTER_EXCEPTION;
+        return ERROR;
     if (strlen(name) >= NAME_SIZE)
-        return INVALID_INPUT_EXCEPTION;
+        return ERROR;
     CollaboratorsListElement actual = project->collaboratorsListElement;
     while (actual)
     {
@@ -118,15 +118,15 @@ Exception editCollaboratorProfile(Project project, Name name)
             printf("Nome: ");
             scanf(" %s", actual->collaborator->name);
             if (strlen(actual->collaborator->name) >= NAME_SIZE)
-                return INVALID_INPUT_EXCEPTION;
+                return ERROR;
             printf("Email: ");
             scanf(" %s", actual->collaborator->email);
             if (strlen(actual->collaborator->email) >= EMAIL_SIZE)
-                return INVALID_INPUT_EXCEPTION;
+                return ERROR;
             printf("Descricao: ");
             scanf(" %s", actual->collaborator->description);
             if (strlen(actual->collaborator->description) >= DESCRIPTION_SIZE)
-                return INVALID_INPUT_EXCEPTION;
+                return ERROR;
             return SUCCESS;
         }
         else
@@ -134,13 +134,13 @@ Exception editCollaboratorProfile(Project project, Name name)
             actual = actual->next_collaboratorsListElement;
         }
     }
-    return NOT_FOUND_EXCEPTION;
+    return ERROR;
 }
 
-Exception pushProject(Project project)
+int pushProject(Project project)
 {
     if (!project)
-        return NULL_POINTER_EXCEPTION;
+        return ERROR;
     ProjectListElement actual = firstProject;
     if (firstProject)
     {
@@ -164,11 +164,11 @@ Exception pushProject(Project project)
     }
 }
 
-Exception deleteProject(Project project)
+int deleteProject(Project project)
 {
     ProjectListElement actual = firstProject, aux;
     if (!firstProject || !project)
-        return NULL_POINTER_EXCEPTION;
+        return ERROR;
     while (actual)
     {
         if (actual->next_project->project == project)
@@ -181,16 +181,16 @@ Exception deleteProject(Project project)
         else
             actual = actual->next_project;
     }
-    return NOT_FOUND_EXCEPTION;
+    return ERROR;
 }
 
-Exception pushCollaborator(Project project, Collaborator collaborator)
+int pushCollaborator(Project project, Collaborator collaborator)
 {
     if (!project || !collaborator)
-        return NULL_POINTER_EXCEPTION;
+        return ERROR;
     CollaboratorsListElement actual = (CollaboratorsListElement)malloc(sizeof(Collaborators_List_Element_t));
     if (!actual)
-        return MEMORY_ALOCATION_EXCEPTION;
+        return ERROR;
     CollaboratorsListElement aux;
     actual = project->collaboratorsListElement;
     if (actual->collaborator == NULL)
@@ -219,12 +219,12 @@ Exception pushCollaborator(Project project, Collaborator collaborator)
     }
 }
 
-Exception deleteCollaborator(Project project, Collaborator collaborator)
+int deleteCollaborator(Project project, Collaborator collaborator)
 {
     CollaboratorsListElement actual = project->collaboratorsListElement, aux, firstElement;
     firstElement = actual;
     if (!project || !collaborator || firstElement->id == 0)
-        return NULL_POINTER_EXCEPTION;
+        return ERROR;
     while (actual)
     {
         if (actual->next_collaboratorsListElement->collaborator == collaborator)
@@ -240,18 +240,18 @@ Exception deleteCollaborator(Project project, Collaborator collaborator)
         }
         actual = actual->next_collaboratorsListElement;
     }
-    return NOT_FOUND_EXCEPTION;
+    return ERROR;
 }
 
 Collaborator searchCollaboratorByName(Project project, Name name)
 {
     if (!project)
-        return (Collaborator)NULL_POINTER_EXCEPTION;
+        return ERROR;
     CollaboratorsListElement actual = (CollaboratorsListElement)malloc(sizeof(Collaborators_List_Element_t));
     if (!actual)
-        return (Collaborator)MEMORY_ALOCATION_EXCEPTION;
+        return ERROR;
     if (strlen(name) >= NAME_SIZE)
-        return (Collaborator)INVALID_INPUT_EXCEPTION;
+        return ERROR;
     actual = project->collaboratorsListElement;
     while (actual)
     {
@@ -264,7 +264,7 @@ Collaborator searchCollaboratorByName(Project project, Name name)
             actual = actual->next_collaboratorsListElement;
         }
     }
-    return (Collaborator)NOT_FOUND_EXCEPTION;
+    return ERROR;
 }
 
-Exception showProjectTasklist(Project project);
+int showProjectTasklist(Project project);

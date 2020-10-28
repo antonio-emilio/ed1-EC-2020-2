@@ -50,28 +50,28 @@ typedef Collaborator_Element_t *Collaborator;
 
 Project createProject(Title title, Description description);
 
-Exception showProjects();
+int showProjects();
 
-Exception showProjectDetails(Project project);
+int showProjectDetails(Project project);
 
-Exception showProjectCollaboratorsList(Project project);
+int showProjectCollaboratorsList(Project project);
 
-Exception showCollaboratorProfile(Project project, Name name);
+int showCollaboratorProfile(Project project, Name name);
 
 Collaborator createCollaboratorProfile(Name name, Email email, Description description);
 
-Exception editCollaboratorProfile(Project project, Name name);
+int editCollaboratorProfile(Project project, Name name);
 
-Exception pushProject(Project project);
+int pushProject(Project project);
 
-Exception deleteProject(Project project);
+int deleteProject(Project project);
 
-Exception pushCollaborator(Project protect, Collaborator collaborator);
+int pushCollaborator(Project protect, Collaborator collaborator);
 
-Exception deleteCollaborator(Project protect, Collaborator collaborator);
+int deleteCollaborator(Project protect, Collaborator collaborator);
 
 Collaborator searchCollaboratorByName(Project project, Name name);
 
-Exception showProjectTasklist(Project project);
+int showProjectTasklist(Project project);
 
 #endif
