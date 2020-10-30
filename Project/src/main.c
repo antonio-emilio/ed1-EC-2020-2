@@ -12,6 +12,7 @@ int main(){
 	noecho();
 	curs_set(0);
 
+
 	initLabels();
 
 	start_color();

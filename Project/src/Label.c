@@ -1,7 +1,6 @@
 #include "Label.h"
 
 
-
 int initLabels(){
     for(int i = 0; i < NUMB_COLORS; i++)
         INIT_PAIRS[i] = False;
