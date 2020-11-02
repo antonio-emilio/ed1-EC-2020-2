@@ -144,14 +144,14 @@ int selectWin(char** options, char* question, int num_options, int y, int x, uns
         } 
         wrefresh(select_win);
 
-        int key = getch();
+        int key = wgetch(select_win);
 
         switch(key)
         {
-            case 65: // key up
+            case KEY_UP: // key up
                 selected_option--;
                 break;
-            case 66: // key down
+            case KEY_DOWN: // key down
                 selected_option++;
                 break;
             case 10: // enter
@@ -225,3 +225,24 @@ int inputWin( char* question, int y, int x, unsigned int width, unsigned int hei
     return OK;
 
 }
+
+
+// main display loop
+int loop(int* status){
+    bool exit = FALSE;
+
+	int main_menu_option = main_menu(status);
+
+
+	while(!exit)
+	{
+		switch(main_menu_option){
+			case 4:
+				exit = TRUE;
+				break;
+			default:
+				status = ERR;
+				exit = TRUE;
+		}
+    }
+};

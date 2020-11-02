@@ -1,7 +1,7 @@
 #include "Display.h"
 #include "Task.h"
 
-void main_menu(){
+int main_menu(int *err){
 
 	int max_y, max_x;
 
@@ -17,28 +17,27 @@ void main_menu(){
     args.y = 0;
 
     pthread_create(&banner_th, NULL, printBanner, &args);
-    usleep(3000); // there is a bug that breaks the other components if this is not called :/
 
-     
+    // there is a bug that breaks the other components if this is not called :/
+    usleep(3000);
+
     // creating select menu
 	char* options[] = {
-		"Criar Projeto",
+		"Criar um Projeto",
 		"Carregar Projeto",
-        "something else",
-        "another stuff",
-        "more stuff", 
-        "even more stuff",
-        "a shit ton of stuff",
+        "Ver Projetos",
+        "Ajuda",
 		"sair :c"
 	};
 
-	int num_options = sizeof(options)/sizeof(char*);
 	char* question = "Bem-Vindo ao Project Organizer";
+	int num_options = sizeof(options)/sizeof(char*);
 
-	selectWin(options, question, num_options, 25, max_x/2 - 25, 0, 0, 0);
+    int choice = selectWin(options, question, num_options, 25, max_x/2 - 25, 0, 0, 0);
 
-   
 	stop = TRUE;
 
     pthread_join(banner_th, NULL);
+
+    return choice;
 }
