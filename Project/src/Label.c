@@ -1,6 +1,7 @@
 #include "Label.h"
 
 
+
 Label_t* createLabel(Color color, LabelName name){
 
     if(color >= NUMB_COLORS || strlen(name) > LABEL_NAME_SIZE)

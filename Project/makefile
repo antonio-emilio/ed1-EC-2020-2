@@ -23,6 +23,7 @@ _OBJ := Label.o main.o  Task.o TaskList.o ProjectOrganizer.o Display.o MainMenu.
 OBJ  := $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
+
 $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
